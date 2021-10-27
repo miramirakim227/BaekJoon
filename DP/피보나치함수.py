@@ -22,24 +22,44 @@
 # fibonacci(3)은 fibonacci(2)와 fibonacci(1)의 결과를 얻고, 2를 리턴한다.
 # 1은 2번 출력되고, 0은 1번 출력된다. N이 주어졌을 때, fibonacci(N)을 호출했을 때, 0과 1이 각각 몇 번 출력되는지 구하는 프로그램을 작성하시오.
 
+# 재원님 피드백: 이 문제 피보나치 첫항을 1 다음항을 0으로하면 if문 없이 구현할 수 있다. 
+# if문을 줄이고 nested list 사용하기!
 N = int(input())
-fibo = [0] * 40
-fibo[1] = 1
-fibo[2] = 2
+fibo = []
+fibo.append([1, 0])
+fibo.append([0, 1])
 
-for i in range(3, 40):
-    fibo[i] = fibo[i-1] + fibo[i-2]
+for i in range(2, 41):
+    fibo.append([fibo[i-1][0] + fibo[i-2][0], fibo[i-1][1] + fibo[i-2][1]])
 
 input_ = []
 for i in range(N):
-    input_.append(int(input())+1)
+    input_.append(int(input()))
 
-for i in input_:      # 0은 int로 못받는다 주의! # scalar, int연산 구별해서!
-    if i-1 == 0:
-        print('1 0')        
-    elif i-1 == 1:
-        print('0 1') 
-    elif i-1 == 2:
-        print('1 1')        
-    else:
-        print(f'{fibo[i-3]} {fibo[i-2]}')
+for i in input_:      
+    print(f'{fibo[i][0]} {fibo[i][1]}')
+
+
+
+# 2021/10/25
+# N = int(input())
+# fibo = [0] * 40
+# fibo[1] = 1
+# fibo[2] = 2
+
+# for i in range(3, 40):
+#     fibo[i] = fibo[i-1] + fibo[i-2]
+
+# input_ = []
+# for i in range(N):
+#     input_.append(int(input())+1)
+
+# for i in input_:      # 0은 int로 못받는다 주의! # scalar, int연산 구별해서!
+#     if i-1 == 0:
+#         print('1 0')        
+#     elif i-1 == 1:
+#         print('0 1') 
+#     elif i-1 == 2:
+#         print('1 1')        
+#     else:
+#         print(f'{fibo[i-3]} {fibo[i-2]}')
